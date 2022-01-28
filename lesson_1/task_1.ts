@@ -130,6 +130,22 @@ let sokolStudent: Student = new Student(
 );
 console.log(sokolStudent);
 
+// [LOG]: Student: {
+//     "firstName": "Kostiantyn",
+//     "lastName": "Sokolenko",
+//     "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//     "id": [
+//       "UA",
+//       1303
+//     ],
+//     "courses": [
+//       "Angular",
+//       "Finite Element Method",
+//       "Structure Mechanics"
+//     ],
+//     "department": "Existek"
+//   }
+
 let sokolTeacher: Teacher = new Teacher(
     {
         firstName: 'Kostiantyn',
@@ -144,4 +160,26 @@ let sokolTeacher: Teacher = new Teacher(
     Courses[2]
 );
 console.log(sokolTeacher);
+
+// [LOG]: Teacher: {
+//     "firstName": "Kostiantyn",
+//     "lastName": "Sokolenko",
+//     "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//     "id": [
+//       "UA",
+//       1303
+//     ],
+//     "courses": [
+//       "Finite Element Method",
+//       "Structure Mechanics"
+//     ],
+//     "department": "Faculty of Civil Engineering",
+//     "workExp": 2,
+//     "position": "Assistant"
+//   }
+
 console.log(Teacher.teaches(sokolTeacher));
+
+// [LOG]: "Assistant Kostiantyn Sokolenko
+//         teaches the following courses: Finite Element
+//         Method and Structure Mechanics"
