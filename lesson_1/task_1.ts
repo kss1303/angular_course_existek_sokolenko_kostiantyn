@@ -87,7 +87,6 @@ class Student implements StudentI {
 class Teacher extends Student implements TeacherI {
     workExp: number;
     position: Position;
-
     constructor(o: TeacherOptionsI, ...courses: string[]) {
         super(
             {
@@ -106,9 +105,9 @@ class Teacher extends Student implements TeacherI {
         return str;
     }
     override study(): string {
-        return this.work();
+        return super.study();
+        // return this.work()
     }
-
     static teaches<T extends Teacher>(teacher: T): string {
         let str: string = `${teacher.position} ${teacher.firstName} ${teacher.lastName} teaches the following courses: `;
         str += teacher.courses.join(' and ');
@@ -128,23 +127,28 @@ let sokolStudent: Student = new Student(
     Courses[1],
     Courses[2]
 );
-console.log(sokolStudent);
 
+console.log(sokolStudent);
 // [LOG]: Student: {
-//     "firstName": "Kostiantyn",
-//     "lastName": "Sokolenko",
-//     "dateOfBirth": "1996-03-12T22:00:00.000Z",
-//     "id": [
-//       "UA",
-//       1303
-//     ],
-//     "courses": [
-//       "Angular",
-//       "Finite Element Method",
-//       "Structure Mechanics"
-//     ],
-//     "department": "Existek"
-//   }
+//   "firstName": "Kostiantyn",
+//   "lastName": "Sokolenko",
+//   "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//   "id": [
+//     "UA",
+//     1303
+//   ],
+//   "courses": [
+//     "Angular",
+//     "Finite Element Method",
+//     "Structure Mechanics"
+//   ],
+//   "department": "Existek"
+// }
+console.log(sokolStudent.age); // 26
+console.log(sokolStudent.ID); // "UA1303"
+console.log(sokolStudent.study()); // "I'm intereseted in: Angular and Finite Element Method and Structure Mechanics"
+// console.log(sokolStudent.id) // Property 'id' is private and only accessible within class 'Student'.
+// sokolStudent.dateOfBirth = new Date(1995, 2, 13) // Cannot assign to 'dateOfBirth' because it is a read-only property.
 
 let sokolTeacher: Teacher = new Teacher(
     {
@@ -160,26 +164,22 @@ let sokolTeacher: Teacher = new Teacher(
     Courses[2]
 );
 console.log(sokolTeacher);
-
 // [LOG]: Teacher: {
-//     "firstName": "Kostiantyn",
-//     "lastName": "Sokolenko",
-//     "dateOfBirth": "1996-03-12T22:00:00.000Z",
-//     "id": [
-//       "UA",
-//       1303
-//     ],
-//     "courses": [
-//       "Finite Element Method",
-//       "Structure Mechanics"
-//     ],
-//     "department": "Faculty of Civil Engineering",
-//     "workExp": 2,
-//     "position": "Assistant"
-//   }
-
-console.log(Teacher.teaches(sokolTeacher));
-
-// [LOG]: "Assistant Kostiantyn Sokolenko
-//         teaches the following courses: Finite Element
-//         Method and Structure Mechanics"
+//   "firstName": "Kostiantyn",
+//   "lastName": "Sokolenko",
+//   "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//   "id": [
+//     "UA",
+//     1303
+//   ],
+//   "courses": [
+//     "Finite Element Method",
+//     "Structure Mechanics"
+//   ],
+//   "department": "Faculty of Civil Engineering",
+//   "workExp": 2,
+//   "position": "Assistant"
+// }
+console.log(sokolTeacher.study()); // "I'm intereseted in: Finite Element Method and Structure Mechanics"
+console.log(sokolTeacher.work()); // "in my position of Assistant, i'm have been working for more than 2 years"
+console.log(Teacher.teaches(sokolTeacher)); //  "Assistant Kostiantyn Sokolenko teaches the following courses: Finite Element Method and Structure Mechanics"
