@@ -58,7 +58,8 @@ class Teacher extends Student {
         return str;
     }
     study() {
-        return this.work();
+        return super.study();
+        // return this.work()
     }
     static teaches(teacher) {
         let str = `${teacher.position} ${teacher.firstName} ${teacher.lastName} teaches the following courses: `;
@@ -74,6 +75,26 @@ let sokolStudent = new Student({
     department: 'Existek',
 }, Courses[0], Courses[1], Courses[2]);
 console.log(sokolStudent);
+// [LOG]: Student: {
+//   "firstName": "Kostiantyn",
+//   "lastName": "Sokolenko",
+//   "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//   "id": [
+//     "UA",
+//     1303
+//   ],
+//   "courses": [
+//     "Angular",
+//     "Finite Element Method",
+//     "Structure Mechanics"
+//   ],
+//   "department": "Existek"
+// }
+console.log(sokolStudent.age); // 26
+console.log(sokolStudent.ID); // "UA1303"
+console.log(sokolStudent.study()); // "I'm intereseted in: Angular and Finite Element Method and Structure Mechanics"
+// console.log(sokolStudent.id) // Property 'id' is private and only accessible within class 'Student'.
+// sokolStudent.dateOfBirth = new Date(1995, 2, 13) // Cannot assign to 'dateOfBirth' because it is a read-only property.
 let sokolTeacher = new Teacher({
     firstName: 'Kostiantyn',
     lastName: 'Sokolenko',
@@ -84,5 +105,23 @@ let sokolTeacher = new Teacher({
     position: 'Assistant',
 }, Courses[1], Courses[2]);
 console.log(sokolTeacher);
-console.log(Teacher.teaches(sokolTeacher));
+// [LOG]: Teacher: {
+//   "firstName": "Kostiantyn",
+//   "lastName": "Sokolenko",
+//   "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//   "id": [
+//     "UA",
+//     1303
+//   ],
+//   "courses": [
+//     "Finite Element Method",
+//     "Structure Mechanics"
+//   ],
+//   "department": "Faculty of Civil Engineering",
+//   "workExp": 2,
+//   "position": "Assistant"
+// }
+console.log(sokolTeacher.study()); // "I'm intereseted in: Finite Element Method and Structure Mechanics"
+console.log(sokolTeacher.work()); // "in my position of Assistant, i'm have been working for more than 2 years"
+console.log(Teacher.teaches(sokolTeacher)); //  "Assistant Kostiantyn Sokolenko teaches the following courses: Finite Element Method and Structure Mechanics"
 //# sourceMappingURL=task_1.js.map
