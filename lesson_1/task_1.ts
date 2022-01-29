@@ -20,25 +20,25 @@ enum Courses {
     'Structure Mechanics',
 }
 
-interface UserI {
+interface IUser {
     firstName: string;
     lastName: string;
     readonly dateOfBirth: userDate;
     get ID(): string;
 }
 
-interface StudentI extends UserI {
+interface IStudent extends IUser {
     courses: string[];
     department: Departments;
 }
 
-interface TeacherI extends StudentI {
+interface ITeacher extends IStudent {
     workExp: number;
     position: Position;
     work(): string;
 }
 
-interface StudentOptionsI {
+interface IStudenOptions {
     firstName: string;
     lastName: string;
     dateOfBirth: userDate;
@@ -46,19 +46,19 @@ interface StudentOptionsI {
     department: Departments;
 }
 
-interface TeacherOptionsI extends StudentOptionsI {
+interface ITeacherOptions extends IStudenOptions {
     workExp: number;
     position: Position;
 }
 
-class Student implements StudentI {
+class Student implements IStudent {
     firstName: string;
     lastName: string;
     readonly dateOfBirth: userDate;
     private id: userID;
     courses: string[];
     department: Departments;
-    constructor(o: StudentOptionsI, ...courses: string[]) {
+    constructor(o: IStudenOptions, ...courses: string[]) {
         (this.firstName = o.firstName),
             (this.lastName = o.lastName),
             (this.dateOfBirth = o.dateOfBirth),
@@ -84,10 +84,10 @@ class Student implements StudentI {
     }
 }
 
-class Teacher extends Student implements TeacherI {
+class Teacher extends Student implements ITeacher {
     workExp: number;
     position: Position;
-    constructor(o: TeacherOptionsI, ...courses: string[]) {
+    constructor(o: ITeacherOptions, ...courses: string[]) {
         super(
             {
                 firstName: o.firstName,
