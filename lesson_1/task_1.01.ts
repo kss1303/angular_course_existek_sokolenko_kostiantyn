@@ -54,7 +54,7 @@ interface TeacherDTO extends StudentDTO {
     position: Position;
 }
 
-class OrdinaryUser implements UserI, CommonMethods {
+class User implements UserI, CommonMethods {
     firstName: string;
     lastName: string;
     readonly dateOfBirth?: userDate;
@@ -81,7 +81,7 @@ class OrdinaryUser implements UserI, CommonMethods {
     }
 }
 
-class Student extends OrdinaryUser implements StudentI {
+class Student extends User implements StudentI {
     position: Position;
     department: Departments;
     courses: string[];
@@ -104,7 +104,7 @@ class Student extends OrdinaryUser implements StudentI {
     }
 }
 
-class Teacher extends OrdinaryUser implements TeacherI {
+class Teacher extends User implements TeacherI {
     position: Position;
     department: Departments;
     courses: string[];
@@ -127,12 +127,29 @@ class Teacher extends OrdinaryUser implements TeacherI {
     }
 }
 
-let sokolUser: OrdinaryUser = new OrdinaryUser({
+let sokolUser: User = new User({
     firstName: 'Kostiantyn',
     lastName: 'Sokolenko',
     dateOfBirth: new Date(1996, 2, 13),
     id: ['UA', 1303],
 });
+
+console.log(sokolUser);
+// [LOG]: User: {
+//   "firstName": "Kostiantyn",
+//   "lastName": "Sokolenko",
+//   "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//   "id": [
+//     "UA",
+//     1303
+//   ]
+// }
+
+//sokolUser.dateOfBirth = new Date(1000, 10, 10)
+//Cannot assign to 'dateOfBirth' because it is a read-only property.
+
+console.log(sokolUser.age); // 26
+console.log(sokolUser.ID); // "UA1303"
 
 let sokolStudent: Student = new Student(
     {
@@ -146,6 +163,26 @@ let sokolStudent: Student = new Student(
     Courses.slice(0, 3)
 );
 
+console.log(sokolStudent);
+// [LOG]: Student: {
+//   "firstName": "Kostiantyn",
+//   "lastName": "Sokolenko",
+//   "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//   "id": [
+//     "UA",
+//     1303
+//   ],
+//   "position": "Student",
+//   "department": "Existek",
+//   "courses": [
+//     "Angular",
+//     "JavaScript",
+//     "TypeScript"
+//   ]
+// }
+
+console.log(sokolStudent.study()); // "I'm intereseted in: Angular, JavaScript, TypeScript"
+
 let sokolTeacher: Teacher = new Teacher(
     {
         firstName: 'Kostiantyn',
@@ -158,6 +195,26 @@ let sokolTeacher: Teacher = new Teacher(
     },
     Courses.slice(3, 5)
 );
+
+console.log(sokolTeacher);
+// [LOG]: Teacher: {
+//   "firstName": "Kostiantyn",
+//   "lastName": "Sokolenko",
+//   "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//   "id": [
+//     "UA",
+//     1303
+//   ],
+//   "position": "Assistant",
+//   "department": "Faculty of Civil Engineering",
+//   "courses": [
+//     "Finite Element Method",
+//     "Structure Mechanics"
+//   ],
+//   "workExp": 2
+// }
+
+console.log(sokolTeacher.work()); // "In my position of Assistant, i'm have been working for more than 2 years"
 
 interface GroupI<T> {
     addStudent(o: T): void;
@@ -177,5 +234,31 @@ class Group<T> implements GroupI<T> {
     }
 }
 
-let AllStudents = new Group<Student>();
-AllStudents.addStudent(sokolStudent);
+let allStudents: Group<Student> = new Group<Student>();
+allStudents.addStudent(sokolStudent);
+console.log(allStudents);
+// [LOG]: Group: {
+//   "students": [
+//     {
+//       "firstName": "Kostiantyn",
+//       "lastName": "Sokolenko",
+//       "dateOfBirth": "1996-03-12T22:00:00.000Z",
+//       "id": [
+//         "UA",
+//         1303
+//       ],
+//       "position": "Student",
+//       "department": "Existek",
+//       "courses": [
+//         "Angular",
+//         "JavaScript",
+//         "TypeScript"
+//       ]
+//     }
+//   ]
+// }
+allStudents.removeStudent(sokolStudent);
+console.log(allStudents);
+// [LOG]: Group: {
+//   "students": []
+// }
