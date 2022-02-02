@@ -1,0 +1,114 @@
+.app-component {
+  background-color: white;
+  outline: 1px solid gray;
+  padding: 20px;
+  font-family: "Calibri light";
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-component__controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  width: 40%;
+  margin: 0 auto;
+  & * {
+    width: 100%;
+    input {
+      width: 98.6%;
+    }
+  }
+  & > *:not(span) {
+    margin-bottom: 10px;
+  }
+}
+
+table {
+  border: 3px solid gray;
+  border-collapse: collapse;
+  width: 100%;
+  th,
+  td {
+    border: 3px solid grey;
+    padding: 10px 15px;
+  }
+  caption {
+    padding-bottom: 0.2em;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border: 3px solid grey;
+    border-bottom: none;
+  }
+  tr:nth-child(2n) {
+    background: whitesmoke;
+  }
+  thead > tr {
+    background-color: rgb(214, 202, 202);
+    font-size: 1.2em;
+    border: 3px solid gray;
+  }
+}
+
+.changeTheme {
+  color: #fff;
+  background-color: black;
+  tr:nth-child(2n) {
+    background: black;
+  }
+  thead > tr {
+    background-color: black;
+    font-size: 1.2em;
+    border: 2px solid gray;
+  }
+  caption {
+    background-color: inherit;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: right;
+  padding-bottom: 1em;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  input {
+    display: none;
+  }
+}
+
+.icon {
+  padding-left: 10px;
+  height: 24px;
+  width: 24px;
+}
+
+.hideIcon {
+  display: none;
+}
+
+button {
+  border-radius: 6px;
+  display: block;
+  width: 150px;
+  height: 50px;
+  margin: 0 auto 20px;
+}
+
+.container_buttons {
+  display: flex;
+  justify-content: center;
+  button {
+    border-radius: 6px;
+    display: block;
+    width: 150px;
+    height: 50px;
+    margin: 0 10px;
+  }
+}

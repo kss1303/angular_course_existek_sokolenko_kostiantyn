@@ -1,6 +1,148 @@
-<label>Введите имя:</label>
-<input [(ngModel)]="name" placeholder="name" />
-<p>{{ name }}</p>
-<p *ngFor="let item of list; index as i">
-  {{ item.purchase }}-{{ item.price }}
-</p>
+<div class="app-component">
+  <button (click)="toggle()">
+    <span *ngIf="!hideControls; else showSpan">Hide input area</span>
+    <ng-template #showSpan> <span> Show input area </span> </ng-template>
+  </button>
+  <div class="app-component__controls" *ngIf="!hideControls">
+    <p [ngStyle]="{ 'text-align': 'justify' }">
+      Fille in the iputs and click on the button <b>Update Table</b> to add the
+      entered data to the table. The button <b>Delete Last</b> will delete the
+      last entry in the table
+    </p>
+    <label
+      >Enter your first name:<input
+        type="text"
+        placeholder="enter your first name"
+        [(ngModel)]="selectedName"
+    /></label>
+    <label
+      >Enter your last name:<input
+        type="text"
+        placeholder="enter your last name"
+        [(ngModel)]="selectedLastName"
+    /></label>
+    <label
+      >Choose the date of your birthday:
+      <input
+        type="date"
+        max="2020-02-01"
+        min="1950-01-01"
+        name="bday"
+        [(ngModel)]="selectedBday"
+    /></label>
+    <span>Select position:</span>
+    <select class="positions" size="2" required [(ngModel)]="selectedPosition">
+      <option
+        *ngFor="let positionItem of positions; index as i"
+        [value]="positionItem"
+      >
+        {{ i + 1 }}. {{ positionItem }}
+      </option>
+    </select>
+
+    <span>Select department:</span>
+    <select
+      class="positions"
+      size="2"
+      required
+      [(ngModel)]="selectedDepartment"
+    >
+      <option *ngFor="let depItem of departments; index as i" [value]="depItem">
+        {{ i + 1 }}. {{ depItem }}
+      </option>
+    </select>
+
+    <span>Select course(-s):</span>
+    <select
+      class="courses"
+      multiple
+      size="3"
+      required
+      [(ngModel)]="selectedCourse"
+    >
+      <option
+        *ngFor="let courseItem of courses; index as i"
+        [value]="courseItem"
+      >
+        {{ i + 1 }}. {{ courseItem }}
+      </option>
+    </select>
+  </div>
+  <div class="container_buttons">
+    <button
+      (click)="
+        handle(
+          {
+            firstName: selectedName,
+            lastName: selectedLastName,
+            dateOfBirth: selectedBday,
+            position: selectedPosition,
+            department: selectedDepartment
+          },
+          selectedCourse
+        )
+      "
+    >
+      Update Table
+    </button>
+    <button (click)="deleteLast()">Delete Last</button>
+  </div>
+
+  <div class="app-component__table">
+    <div class="container">
+      <label class="label" for="theme">
+        click me
+        <img
+          class="icon"
+          src="../assets/day-sunny.bmp"
+          [ngClass]="{ hideIcon: condition }"
+          alt=""
+        />
+        <img
+          class="icon"
+          src="../assets/night.png"
+          [ngClass]="{ hideIcon: !condition }"
+          alt=""
+        />
+        <input type="checkbox" id="theme" [(ngModel)]="condition" />
+      </label>
+    </div>
+
+    <table [ngClass]="{ changeTheme: condition }">
+      <caption>
+        {{
+          tableCaption
+        }}
+
+        <span *ngIf="getStudentsCount() != 0"
+          >- {{ getStudentsCount() }} student(-s)
+        </span>
+        <span *ngIf="getStudentsCount() == 0"> - group is empty</span>
+      </caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>ID</th>
+          <th>Position</th>
+          <th>Department</th>
+          <th>Courses</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students; index as i">
+          <th>{{ i + 1 }}</th>
+          <th>{{ students[i].firstName }}</th>
+          <th>{{ students[i].lastName }}</th>
+          <th>{{ students[i].age }}</th>
+          <th>{{ students[i].ID }}</th>
+          <th>{{ students[i].position }}</th>
+          <th>{{ students[i].department }}</th>
+          <th>{{ students[i].courses }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
