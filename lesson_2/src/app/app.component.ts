@@ -153,7 +153,7 @@ export class AppComponent {
     {
       firstName: 'Bober',
       lastName: 'Bobrov',
-      dateOfBirth: new Date(1990, 6, 23),
+      dateOfBirth: undefined,
       position: Position.Student,
       department: 'Existek',
     },
@@ -169,7 +169,7 @@ export class AppComponent {
 
   selectedName: string = '';
   selectedLastName: string = '';
-  selectedBday: string = '';
+  selectedBday: string | undefined = undefined;
 
   courses: string[] = Courses;
   selectedCourse: string[] = [];
@@ -188,7 +188,8 @@ export class AppComponent {
       {
         firstName: o.firstName,
         lastName: o.lastName,
-        dateOfBirth: new Date(o.dateOfBirth),
+        dateOfBirth:
+          o.dateOfBirth != undefined ? new Date(o.dateOfBirth) : undefined,
         position: o.position,
         department: o.department,
       },
