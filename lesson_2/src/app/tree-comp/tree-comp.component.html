@@ -1,0 +1,19 @@
+<div *ngFor="let element of innerTree; index as i">
+  <p class="para-text">{{ element.name }}</p>
+  <input type="text" [(ngModel)]="element.name" />
+  <button
+    *ngIf="i != 0"
+    (click)="tree = change(innerTree, element.position, 'up')"
+  >
+    up
+  </button>
+  <button
+    *ngIf="i != innerTree.length - 1"
+    (click)="tree = change(innerTree, element.position, 'down')"
+  >
+    down
+  </button>
+  <button (click)="delete(element)">delete</button>
+  <app-tree *ngIf="element.children" [tree]="element.children"> </app-tree>
+</div>
+<button (click)="add()">add</button>
