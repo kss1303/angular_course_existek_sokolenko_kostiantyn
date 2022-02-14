@@ -1,0 +1,80 @@
+<div class="app-component">
+  <div class="app-component__controls">
+    <p>select filter option</p>
+    <select [(ngModel)]="description">
+      <option
+        *ngFor="let description of descriptions; index as i"
+        [value]="description"
+      >
+        {{ i + 1 }}. {{ description }}
+      </option>
+    </select>
+    <p>options to filter by countries</p>
+    <select [(ngModel)]="searchValue">
+      <option *ngFor="let country of countries; index as i" [value]="country">
+        {{ i + 1 }}. {{ country }}
+      </option>
+    </select>
+    <p>enter age number</p>
+    <input type="text" [(ngModel)]="searchValue" />
+  </div>
+  <hr />
+  <div class="app-component__table">
+    <table [ngClass]="{ changeTheme: condition }">
+      <caption>
+        {{
+          tableCaption
+        }}
+      </caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>id value</th>
+          <th>id name</th>
+          <th>username</th>
+          <th>first name</th>
+          <th>last name</th>
+          <th>gender</th>
+          <th>date of birth</th>
+          <th>age</th>
+          <th>country</th>
+          <th>lat</th>
+          <th>lng</th>
+          <th>avatar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let user of users | filter: searchValue:description;
+            let i = index
+          "
+        >
+          <th>{{ i + 1 }}</th>
+          <th>{{ user.id.name }}</th>
+          <th>{{ user.id.value }}</th>
+          <th>{{ user.login.username }}</th>
+          <th>{{ user.name.first }}</th>
+          <th>{{ user.name.last }}</th>
+          <th>{{ user.gender }}</th>
+          <th>{{ user.dob.date | date }}</th>
+          <th>{{ user.dob.age }}</th>
+          <th>{{ user.location.country | uppercase }}</th>
+          <th>
+            {{ user.location.coordinates.latitude | number: "3.2-2" }}
+          </th>
+          <th>
+            {{ user.location.coordinates.longitude | number: "3.2-2" }}
+          </th>
+          <th>
+            <img
+              class="img_thumbnail"
+              src="{{ user.picture.thumbnail }}"
+              alt="{{ user.id.name + user.id.value }}"
+            />
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
