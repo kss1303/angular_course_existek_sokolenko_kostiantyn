@@ -1,7 +1,7 @@
 <div class="app-component">
   <div class="app-component__controls">
     <p>select filter option</p>
-    <select [(ngModel)]="description">
+    <select [(ngModel)]="description" (change)="toggle($event)">
       <option
         *ngFor="let description of descriptions; index as i"
         [value]="description"
@@ -9,15 +9,26 @@
         {{ i + 1 }}. {{ description }}
       </option>
     </select>
-    <p>options to filter by countries</p>
-    <select [(ngModel)]="searchValue">
-      <option *ngFor="let country of countries; index as i" [value]="country">
-        {{ i + 1 }}. {{ country }}
-      </option>
-    </select>
-    <p>enter age number</p>
-    <input type="text" [(ngModel)]="searchValue" />
+
+    <div *ngIf="showCountryOptions">
+      <p>options to filter by countries</p>
+      <select [(ngModel)]="searchValue">
+        <option *ngFor="let country of countries; index as i" [value]="country">
+          {{ i + 1 }}. {{ country }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="showNumberInput">
+      <p>enter age number</p>
+      <input type="number" [(ngModel)]="searchValue" />
+    </div>
+    <div *ngIf="showIdInput">
+      <p>enter id</p>
+      <input type="text" [(ngModel)]="searchValue" />
+    </div>
   </div>
+
   <hr />
   <div class="app-component__table">
     <table [ngClass]="{ changeTheme: condition }">
@@ -29,8 +40,9 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>id value</th>
-          <th>id name</th>
+          <!-- <th>id value</th>
+          <th>id name</th> -->
+          <th>full id</th>
           <th>username</th>
           <th>first name</th>
           <th>last name</th>
@@ -51,8 +63,11 @@
           "
         >
           <th>{{ i + 1 }}</th>
-          <th>{{ user.id.name }}</th>
-          <th>{{ user.id.value }}</th>
+          <!-- <th>{{ user.id.name }}</th>
+          <th>{{ user.id.value }}</th> -->
+          <th>
+            {{ user.fullId }}
+          </th>
           <th>{{ user.login.username }}</th>
           <th>{{ user.name.first }}</th>
           <th>{{ user.name.last }}</th>

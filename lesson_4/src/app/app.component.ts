@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnChanges,
-  OnInit,
-  SimpleChange,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // import { KeyValue } from '@angular/common';
 
@@ -13,7 +7,7 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   tableCaption: string = 'users';
 
   condition: boolean = false;
@@ -26,7 +20,10 @@ export class AppComponent implements OnInit, OnChanges {
     'age-ascending',
     'age-more-than',
     'age-less-than',
-    'ID',
+    'ID-is-null',
+    'latitude',
+    'longitude',
+    'search-by-id',
   ];
   users: any[] = [
     {
@@ -466,8 +463,68 @@ export class AppComponent implements OnInit, OnChanges {
       }
       return this.countries;
     });
+    this.users.forEach(
+      (user) =>
+        (user.fullId = (user.id.name + user.id.value)
+          .toLowerCase()
+          .replace(/\s/g, ''))
+    );
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+
+  showCountryOptions: boolean = false;
+  showNumberInput: boolean = false;
+  showIdInput: boolean = false;
+  toggle(e: Event) {
+    let element = (<HTMLSelectElement>e.target).value;
+    console.log(element);
+    switch (element) {
+      case 'country':
+        this.showCountryOptions = true;
+        this.showNumberInput = false;
+        this.showIdInput = false;
+        break;
+      case 'age-more-than':
+        this.showNumberInput = true;
+        this.showCountryOptions = false;
+        this.searchValue = 0;
+        this.showIdInput = false;
+        break;
+      case 'age-less-than':
+        this.showNumberInput = true;
+        this.showCountryOptions = false;
+        this.searchValue = 0;
+        this.showIdInput = false;
+        break;
+      case 'search-by-id':
+        this.showIdInput = true;
+        this.showCountryOptions = false;
+        this.showNumberInput = false;
+        break;
+      case 'age-descending':
+        this.showIdInput = false;
+        this.showCountryOptions = false;
+        this.showNumberInput = false;
+        break;
+      case 'age-ascending':
+        this.showIdInput = false;
+        this.showCountryOptions = false;
+        this.showNumberInput = false;
+        break;
+      case 'ID-is-null':
+        this.showIdInput = false;
+        this.showCountryOptions = false;
+        this.showNumberInput = false;
+        break;
+      case 'latitude':
+        this.showIdInput = false;
+        this.showCountryOptions = false;
+        this.showNumberInput = false;
+        break;
+      case 'longitude':
+        this.showIdInput = false;
+        this.showCountryOptions = false;
+        this.showNumberInput = false;
+        break;
+    }
   }
 }

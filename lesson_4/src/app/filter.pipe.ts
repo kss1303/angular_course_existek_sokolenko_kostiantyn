@@ -46,12 +46,32 @@ export class FilterPipe implements PipeTransform {
       return filtredArray;
     }
 
-    if (description === 'ID') {
+    if (description === 'ID-is-null') {
       console.log('ID is null and empty', searchValue);
       let filtredArray = users.filter(
         (user: any) => user.id.value === null || user.id.name === ''
       );
       console.log('ID', filtredArray);
+      return filtredArray;
+    }
+
+    if (description === 'latitude' || description === 'longitude') {
+      console.log(description, searchValue);
+      let filtredArray = users.sort(
+        (a: any, b: any) =>
+          a.location.coordinates[description] -
+          b.location.coordinates[description]
+      );
+      console.log(filtredArray);
+      return filtredArray;
+    }
+
+    if (description === 'search-by-id') {
+      console.log('search-by-id', searchValue);
+      let filtredArray = users.filter((user: any) =>
+        user.fullId.includes(searchValue)
+      );
+      console.log('search-by-id', filtredArray, searchValue);
       return filtredArray;
     }
   }
