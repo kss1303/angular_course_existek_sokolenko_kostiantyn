@@ -499,6 +499,7 @@ export class AppComponent implements OnInit {
         this.showIdInput = true;
         this.showCountryOptions = false;
         this.showNumberInput = false;
+        this.searchValue = '';
         break;
       case 'age-descending':
         this.showIdInput = false;
