@@ -10,8 +10,6 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   tableCaption: string = 'users';
 
-  condition: boolean = false;
-
   searchValue: any;
   description: string = '';
   descriptions: string[] = [
@@ -453,7 +451,7 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  countries: any[] = ['All list'];
+  countries: string[] = ['All list'];
   ngOnInit(): void {
     this.users.filter((item) => {
       if (this.countries.includes(item.location.country)) {
@@ -485,14 +483,14 @@ export class AppComponent implements OnInit {
         break;
       case 'age-more-than':
         this.showNumberInput = true;
-        this.showCountryOptions = false;
         this.searchValue = 0;
+        this.showCountryOptions = false;
         this.showIdInput = false;
         break;
       case 'age-less-than':
         this.showNumberInput = true;
-        this.showCountryOptions = false;
         this.searchValue = 0;
+        this.showCountryOptions = false;
         this.showIdInput = false;
         break;
       case 'search-by-id':
