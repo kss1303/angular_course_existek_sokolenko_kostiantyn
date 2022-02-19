@@ -83,8 +83,8 @@
           <th>
             <img
               class="img_thumbnail"
-              src="{{ user.picture.thumbnail }}"
-              alt="{{ user.id.name + user.id.value }}"
+              [src]="user.picture.thumbnail"
+              [attr.alt]="user.id.name + user.id.value"
             />
           </th>
         </tr>
