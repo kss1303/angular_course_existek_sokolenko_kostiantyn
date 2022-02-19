@@ -195,40 +195,4 @@ export class AppComponent implements OnInit {
       });
     };
   }
-
-  // TD approach
-  // @ViewChild('form') form!: NgForm;
-  // answers = [
-  //   { type: 'yes', text: 'Да' },
-  //   { type: 'no', text: 'нет' },
-  // ];
-  // defaultAnswer = 'yes';
-  // defaultCountry = 'ua';
-  // formData = {};
-  // isSubmited = false;
-  // addRandEmail() {
-  //   const randEmail = 'test@tst.com';
-  //   // console.log(this.form);
-  //   // this.form.setValue({
-  //   //   user: {
-  //   //     pass: '',
-  //   //     email: randEmail,
-  //   //   },
-  //   //   country: '',
-  //   //   answer: '',
-  //   // });
-  //   this.form.form.patchValue({
-  //     user: {
-  //       email: randEmail,
-  //     },
-  //   });
-  // }
-  // submitForm(form: NgForm) {
-  //   this.isSubmited = true;
-  //   console.log(form);
-  //   console.log('Submitted');
-  //   console.log(form.value);
-  //   this.formData = this.form.value;
-  //   this.form.reset();
-  // }
 }
