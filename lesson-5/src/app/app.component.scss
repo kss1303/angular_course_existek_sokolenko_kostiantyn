@@ -1,0 +1,29 @@
+body {
+  background-color: red;
+}
+
+.container {
+  box-sizing: border-box;
+  max-width: 768px;
+  outline: 1px solid gray;
+  background-color: antiquewhite;
+  padding: 20px;
+}
+
+input.ng-invalid {
+  border: 2px solid red;
+  background-color: transparent;
+  color: red;
+  font-weight: bold;
+}
+button {
+  margin-top: 10px;
+}
+button ~ button {
+  margin-left: 10px;
+}
+
+code {
+  font-size: 1.2em;
+  font-family: consolas;
+}
